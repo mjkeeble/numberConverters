@@ -1,6 +1,6 @@
 # Number Converters
 
-This repo now contains the numbersToText file previously included in the [IronSnippets](https://github.com/mjkeeble/IronSnippets). My intention is to expand this into a stand-alone web site and API with various number conversion functions
+This repo now contains the numbersToText file previously included in the [IronSnippets](https://github.com/mjkeeble/IronSnippets). My intention is to expand this into a stand-alone web site and API with various number conversion functions. Why? Because I can!
 * numbers to text conversion
   * English
   * German
@@ -15,7 +15,7 @@ This repo now contains the numbersToText file previously included in the [IronSn
 Set of functions to convert integers, decimals and currencies to words.
 This may not be the most elegant approach to converting numbers, so improvement suggestions are welcome!
 
-### float2Words
+### decimal2Words
 Returns the amount entered as a text string in words.
 
 Parameters:
