@@ -2,48 +2,51 @@
 // This file is part of IronSnippets by Mark J. Keeble
 // https://github.com/mjkeeble/IronSnippets
 
-function float2Words(num) {
+function float2WordsEN(num) {
   let floatInText = "";
   let decimal = num.toString().split(".")[1];
   if (Math.floor(num) == 0) {
       floatInText = "Zero point"
   } else {
-      floatInText = integer2Words(Math.floor(num)) + " point";
+      floatInText = integer2WordsEN(Math.floor(num)) + " point";
   } // End if
-  console.log(decimal);
+  console.log(decimal); //===========================
   for (let i = 0; i < decimal.length; i++) {
-      floatInText += " " + integer2Words(decimal.charAt(i));
+      floatInText += " " + integer2WordsEN(decimal.charAt(i));
   } // end for loop
   return floatInText.trim();
-} //End float2Words
+} //End float2WordsEN
 
-function currency2Words(value, currency) {
-  let currencyInText = integer2Words(Math.floor(value), "us");
+// **********************************************
+
+function currency2WordsEN(value, currency) {
+  let currencyInText = integer2WordsEN(Math.floor(value), "us");
   const currencies = {
       //["Currency code", "currency unit", "subdivision plural", "subdivision singular"]
       "USD": ["dollar", "cents", "cent"],
       "EUR": ["euros", "cents", "cent"],
       "GBP": ["pounds", "pence", "pence"]
   };
-  console.log(currency);
-  console.log(Math.floor((value % 1) * 100));
-  
+  console.log(currency); //===========================
+  console.log(Math.floor((value % 1) * 100)); //===========================
 
   let unit = currencies[currency.toUpperCase()][0];
   let subunit = Math.floor((value % 1) * 100) < 2 ? currencies[currency.toUpperCase()][2] : currencies[currency.toUpperCase()][1];
   if (Math.floor(value) >= 1) currencyInText += " " + unit
   if (Math.floor(value) != value) {
       if (Math.floor(value) > 1) currencyInText += " and "
-      currencyInText += integer2Words(Math.floor((value % 1) * 100))
+      currencyInText += integer2WordsEN(Math.floor((value % 1) * 100))
           + " "
           + subunit;
   } // end if
   return (currencyInText.charAt(0).toUpperCase() + currencyInText.slice(1)).trim()
-} // End currency2Words
+} // End currency2WordsEN
 
-function integer2Words(num, sys = "") {
+// **********************************************
+
+function integer2WordsEN(num, sys = "") {
   let numInText = ""
-  console.log(num);
+  console.log(num); //===========================
   
   num = parseInt(num);
   const thousands = ["", "thousand", "million", "thousand", "billion", "thousand", "trillion", "quadrillion", "quintillion", "sextillion"];
@@ -55,25 +58,27 @@ function integer2Words(num, sys = "") {
   num = num.toString();
   let i = 1;
   while (i < (num.length / 3)) {
-      numInText = (hundreds2Words(num.substring(num.length - (i * 3), num.length - (i - 1) * 3)))
+      numInText = (numbersUpTo99EN(num.substring(num.length - (i * 3), num.length - (i - 1) * 3)))
           + " "
           + thousands[i - 1]
           + " "
           + numInText;
       i++
   } //end while
-  numInText = (hundreds2Words((num.substring(0, num.length - ((i - 1) * 3)))))
+  numInText = (numbersUpTo99EN((num.substring(0, num.length - ((i - 1) * 3)))))
       + " "
       + thousands[i - 1]
       + " "
       + numInText;
-  console.log(numInText);
+  console.log(numInText); //===========================
 
   return (numInText.charAt(0).toUpperCase() + numInText.slice(1)).trim();
 
-} // End integer2Words
+} // End integer2WordsEN
 
-function hundreds2Words(num) {
+// **********************************************
+
+function numbersUpTo99EN(num) {
   const zero2Nineteen = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
   const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
   let txt = "";
@@ -94,12 +99,6 @@ function hundreds2Words(num) {
       txt += zero2Nineteen[Math.floor(parseInt(num) % 10)];
   } // End if
   return txt;
-} // End hundreds2Words
+} // End numbersUpTo99EN
 
 
-// tests
-console.log(currency2Words(65.02, "eur"))
-console.log(integer2Words(73628483723));
-array.forEach(element => {
-  
-});
