@@ -1,56 +1,65 @@
 # Number Converters
 
-This repo now contains the numbersToText file previously included in the [IronSnippets](https://github.com/mjkeeble/IronSnippets). My intention is to expand this into a stand-alone web site and API with various number conversion functions
+This repo now contains the numbersToText file previously included in the [IronSnippets](https://github.com/mjkeeble/IronSnippets). My intention is to expand this into a stand-alone web site and API with various number conversion functions. Why? Because I can!
 * numbers to text conversion
-  * English
+  * English (*done*)
   * German
   * French
   * contributions for other languages welcome!
 * text to numbers conversion (maybe!)
-* numbers to roman numerals (and back)
+* decimal to roman numerals conversion (*done*)
 * base conversions
 
+## I offer no guarantee of accuracy in the results.Use at your own risk!
+
 # numberToWords
-(numberToWords.js)
+(numbersToWordsEN.js)
 Set of functions to convert integers, decimals and currencies to words.
+Short-scale numbering is used for large numbers so 1 billion = 1000 x 1 million
+
 This may not be the most elegant approach to converting numbers, so improvement suggestions are welcome!
 
-### float2Words
-Returns the amount entered as a text string in words.
+### number2WordsEN()
+Returns the value entered in words.
 
 Parameters:
-1. num - the number to be converted.
+1. number (string) - the number to be converted .
 
-*The code expects a decimal point.* If a comma is used replace the '.' in the split method in line 7 with a comma.
+*The code expects a decimal point.* If a comma is used replace the '.' in the split methods in lines 8 and 9 with a comma and " point" with " comma" in line 12.
 
-*Dependencies:* Calls integer2Words and hundreds2Words functions.
+*Dependencies:* Calls integerToWordsEN() and (indirectly) numbersUnderThousandToWordsEN() functions.
 
-### currency2Words
+### integerToWordsEN()
+Returns an integer in words.
+
+Parameters:
+1. number (string) - the integer to be converted
+
+*Dependencies:* calls numbersUnderThousandToWordsEN() function.
+
+### numbersUnderThousandToWordsEN()
+Returns an integer value below 1000 in words.
+
+Parameters:
+1. number (string) - the integer to be converted
+
+Can be used on a stand-alone basis, but is concieved to be called by the other functions.
+
+### currencyToWordsEN()
 Returns a monetary value as a text string in words. 
 
 Parameters:
-1. num - the value to be converted
-1. 'currency' (optional) - three-letter currency code
+1. num (string) - the value to be converted
+1. 'currency' (optional string) - three-letter currency code. default value is 'EUR'
 
 The currency list includes dollar, euro and pounds - additional currencies can be added to the currency object after line 23.
 
-Uses the US numbering system for billions.
+*Dependencies:* Calls integerToWordsEN and (indirectly) numbersUnderThousandToWordsEN functions. 
 
-*Dependencies:* Calls integer2Words and hundreds2Words functions. 
+# Decimal to Roman Numerals
+(numeralsToNumbers.js and numbersToNumerals.js)
 
-### integer2Words
-Returns an integer as a text string in words.
+Convert between decimal and Roman Numerals.
 
-Parameters:
-1. num - the value to be converted
-1. 'sys' (optional) - enter 'us' to use the American numbering system where 10^9 = 1 billion, otherwise 10^12 = 1 billion
-
-*Dependencies:* calls hundreds2Words function.
-
-### hundreds2Words
-Returns an integer value below 1000 as a text string in words.
-
-Can be used on a stand-alone basis, but is concieved as a subordinated function to the others.
-
-This function can be used on a stand-alone basis where appropriate, but was concieved as a subordinate function to integer2Words.
+Since Roman Numerals are generally accepted to cover the range 1 - 3999, this convention has been retained here.
 
