@@ -7,7 +7,7 @@ function currencyToWordsDE(value, currency) {
 } // End currencyToWordsDE
 
 // ********************************************DE
-function integerToWordsDE(integer, sys = "") {
+function integerToWordsDE(integer) {
 } // End integerToWordsDE
 
 // *******************************************DDE
