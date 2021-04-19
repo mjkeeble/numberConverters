@@ -4,16 +4,21 @@
 // Enter param as a string
 
 function numberToWordsEN(number) {
+
+  console.log(`numberToWords EN`); //*********************
+
   let numberAsText = ""
   let integer = parseInt(number.toString().split(".")[0]);
   let decimal = number.toString().split(".")[1];
 
   numberAsText = integerToWordsEN(integer)
-  if (decimal) numberAsText += " point";
+  if (decimal) {
+    numberAsText += " point";
+    for (let i = 0; i < decimal.length; i++) {
+      numberAsText += " " + integerToWordsEN(decimal.charAt(i));
+    } // end for loop
+  }
 
-  for (let i = 0; i < decimal.length; i++) {
-    numberAsText += " " + integerToWordsEN(decimal.charAt(i));
-  } // end for loop
   return numberAsText[0] + numberAsText.substring(1).toLowerCase().trim();
 
 } // End numberToWordsEN
@@ -24,6 +29,9 @@ function numberToWordsEN(number) {
 // Enter param as a string
 
 function integerToWordsEN(integer) {
+
+  console.log(`integerToWords EN`); //*********************
+
   let integerAsText = "";
   const partials = [];
   const thousands = ["", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion", "sextillion"];
@@ -58,7 +66,7 @@ function integerToWordsEN(integer) {
 // Enter param as a string
 
 function numbersUnderThousandToWordsEN(number) {
-  const zero2Nineteen = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+  const zero2Nineteen = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
   const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
   let txt = "";
   if (number.length == 3 && number.charAt(0) != "0") {
@@ -82,8 +90,6 @@ function numbersUnderThousandToWordsEN(number) {
 
 
 // **********************************************
-console.log(currencyToWordsEN("1.77372"))
-
 // Enter params as strings
 
 function currencyToWordsEN(value, currency = "EUR") {
@@ -95,17 +101,12 @@ function currencyToWordsEN(value, currency = "EUR") {
     "GBP": ["Pound", "Pounds", "pence", "pence"]
   };
 
+  console.log(`currencyToWords EN`); //*********************
+
   // add validity check for currency provided
 
   let currencyAsText = "";
   let units = value.split(".")[0];
-  console.log({ units });
-  let subunits = value.split(".")[1].substring(0, 2);
-  let subunitText = ""
-  console.log({ subunits })
-  let fractionsOfSubunits = value.split(".")[1].substring(2);
-  let fractionText = ""
-  console.log({ fractionsOfSubunits })
 
   switch (units) {
     case (""):
@@ -119,6 +120,11 @@ function currencyToWordsEN(value, currency = "EUR") {
         " ", currencies[currency][1], " ");
   }
 
+  if (value.split(".").length >1) {
+  let subunits = value.split(".")[1].substring(0, 2);
+  let subunitText = ""
+  let fractionsOfSubunits = value.split(".")[1].substring(2);
+  let fractionText = ""
   switch (parseInt(subunits)) {
     case (0):
       if (fractionsOfSubunits) subunitText += "Zero"
@@ -130,8 +136,6 @@ function currencyToWordsEN(value, currency = "EUR") {
       subunitText = integerToWordsEN(subunits);
 
   }
-  console.log({ currencyAsText });
-  console.log({ subunitText });
 
   if (fractionsOfSubunits) {
     fractionText = " point"
@@ -140,15 +144,13 @@ function currencyToWordsEN(value, currency = "EUR") {
         integerToWordsEN(fractionsOfSubunits.charAt(i)).toLowerCase();
     } // end for loop
   }
-  console.log(`i'm here`)
+
   if (fractionText || parseInt(subunits) > 1) {
     fractionText += " " + currencies[currency][3];
     subunitText += fractionText;
   } else if (parseInt(subunits) === 1) {
     subunitText += " " + currencies[currency][2];
   }
-  console.log({ fractionText });
-  console.log({ subunitText });
 
   if (subunitText) {
     if (currencyAsText) {
@@ -156,10 +158,13 @@ function currencyToWordsEN(value, currency = "EUR") {
     }
     currencyAsText += subunitText.toLowerCase();
   }
+}
   currencyAsText = currencyAsText[0].toUpperCase() + currencyAsText.substring(1).trim()
 
   return currencyAsText
 }
+
+export { numberToWordsEN, currencyToWordsEN }
 
 
 
