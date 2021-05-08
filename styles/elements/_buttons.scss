@@ -1,0 +1,25 @@
+@use "../base" as *;
+
+.button {
+  max-width: 90vh;
+}
+.social-button{
+  &:hover{
+    background-color: $turquoise-green !important;
+    border-color: $turquoise-green !important;;
+  }
+  &:active{
+    background-color: darken($turquoise-green, 20%) !important;
+    border-color: darken($turquoise-green, 20%) !important;
+  }
+}
+.button.contact-button {
+  background-color: $turquoise-green !important;
+  &:hover{
+    background-color: darken($turquoise-green, 20%) !important;
+  }
+  &:active{
+    background-color: darken($turquoise-green, 30%) !important;
+  }
+}
+
