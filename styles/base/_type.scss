@@ -1,0 +1,32 @@
+@use "colors.scss" as *;
+
+@font-face {
+  font-family: MjkRegular;
+  src: url("/styles/Mjk-Regular.ttf") 
+}
+
+@font-face {
+  font-family: MjkTitles;
+  src: url("/styles/Mjktitles3-Bold.ttf") 
+}
+
+.is-handwritten {
+  font-family: MjkRegular !important;
+  font-size: 5rem !important;
+}
+
+.is-handwritten-title {
+  font-family: MjkTitles;
+  font-size: 3.75rem;
+  color: $lavender-blue;
+  letter-spacing: -0.1rem;
+}
+
+.skill {
+  margin-bottom: 0.4em;
+  margin-right: 1em;
+}
+
+.is-underlined {
+  text-decoration: underline;
+}
