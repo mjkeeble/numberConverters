@@ -25,45 +25,19 @@ const wordValues = {
   "billiard": 10**15,
   }
   
-function test(integerInWords) {
-  let outputNumber = 0
-  let partialValue = 0;
-  while (integerInWords.length > 0) {
-    console.log(`start of do-while loop`)
-    let currentNumber = []
-      for (let i = 1; i <= Math.min(integerInWords.length, 8); i++) {
-        console.log(integerInWords.substring(0, i + 3).padEnd(i + 3," "))
-        currentNumber = processWord(integerInWords.substring(0, i + 3).padEnd(i + 3," "));
-
-        if (currentNumber) break;
-      }
-    const [value, wordLength, action, endPartial] = currentNumber;
-    console.log({value});
-    console.log({wordLength});
-    console.log({action});
-    console.log({endPartial});
-
-    switch (action) {
-      case "add":
-        partialValue += value;
-        break;
-      case "multiply":
-        if (!partialValue) partialValue ++;
-        partialValue *= value;
-        break;
+function test(numberInWords) {
+  // do {
+    let partialValue = 0;
+//     console.log(`start of do-while loop`)
+  
+    for (let i = 1; i <= Math.min(numberInWords.length, 8); i++) {
+      console.log(numberInWords.substring(0, i + 3).padEnd(i + 3," "))
+      let currentNumber = processWord(numberInWords.substring(0, i + 3).padEnd(i + 3," "));
+      console.log({currentNumber})
     }
-  //   remove word just processed from integerInWords
-    integerInWords = integerInWords.substring(wordLength)
-
-    if (endPartial){
-      outputNumber += partialValue;
-      partialValue = 0;
-    }
-    console.log({partialValue})
-    console.log({outputNumber})
-
-} // end while
-  return outputNumber += partialValue;
+   
+    
+// } while (numberInWords.length)
 }
 
 
@@ -72,7 +46,7 @@ function test(integerInWords) {
 // processWord function returns an array:
 // [
 //   value of the word (integer), 
-//   number of letters to be removed from integerInWords (integer),
+//   number of letters to be removed from numberInWords (integer),
 //   action to be taken with the number (string)
 //   whether partial value should be consolidated (boolean)
 // ]
@@ -175,4 +149,4 @@ function processWord (word) {
   }
 }
 
-console.log(test(`viertausend eins`))
+console.log(test(`sechzehn billiard`))
