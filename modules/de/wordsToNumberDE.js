@@ -1,4 +1,12 @@
+// Next refactor: remove switch scenarios. Put return arrays intowordValues
+
 const wordValues = {
+  //property array structure:
+    // [
+    // value of the word (integer), 
+    //   number of letters to be removed from integerInWords (integer),
+    //   action to be taken with the number (string)      //   whether partial value should be consolidated (boolean)
+    // ]
   "null": 0,
   "ein": 1,
   "zwei": 2,
@@ -25,14 +33,14 @@ const wordValues = {
   "billiard": 10**15,
   }
   
-function test(integerInWords) {
+function integerToNumberDE (integerInWords) {
   let outputNumber = 0
   let partialValue = 0;
   while (integerInWords.length > 0) {
     console.log(`start of do-while loop`)
     let currentNumber = []
       for (let i = 1; i <= Math.min(integerInWords.length, 8); i++) {
-        console.log(integerInWords.substring(0, i + 3).padEnd(i + 3," "))
+        // currentNumber includes additional 3 characters so processWord can check for tens(drei-ßig, vier-zig, etc.)
         currentNumber = processWord(integerInWords.substring(0, i + 3).padEnd(i + 3," "));
 
         if (currentNumber) break;
@@ -120,10 +128,22 @@ function processWord (word) {
         word.length - 3,
         "add",
         false
-      ]
-      break;;
+      ];
+      break;
       
     case "drei":
+      let value = wordValues[word.substring(0,word.length - 3)]
+      if (word.substring(word.length - 3) === "ßig"){
+        len = word.length;
+        value *= 10
+      } 
+      return [
+        value,
+        len,
+        "add",
+        false
+      ];
+            
     case "vier":
     case "fünf":
     case "acht":
@@ -138,8 +158,7 @@ function processWord (word) {
         len,
         "add",
         false
-      ]
-      break;; 
+      ];
             
     case "hundert":
       return [
@@ -148,8 +167,6 @@ function processWord (word) {
         "multiply",
         false
       ];
-      break;
-
             
     case "tausend":
     case "million":
@@ -168,11 +185,22 @@ function processWord (word) {
         "multiply",
         true
       ];
-      break;
         
     default:
-      return;         
+        return [0, 0, "ERROR!", false ];         
   }
 }
 
-console.log(test(`viertausend eins`))
+function wordsToDecimalDE(decimalInWords) {
+return 'wordsToDecimalDE';
+};
+
+function wordsToCurrencyDE(currencyInWords) {
+  return `wordsToCurrency EN`
+};
+
+function wordsToNumberDE (numberInWords) {
+return `wordsToNumber EN`
+};
+
+export {integerToNumberDE, wordsToDecimalDE, wordsToCurrencyDE, wordsToNumberDE};
