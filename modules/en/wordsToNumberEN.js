@@ -62,10 +62,10 @@ function wordsToIntegerEN(integerInWords) {
 
 
 function cleanIntegerInWords(integerInWords) {
-  integerInWords = integerInWords.replace(/-/g, " ");
-  integerInWords = integerInWords.replace(/[^a-zA-Z ]/g, "");
-  integerInWords = integerInWords.replace(/( and )/g, " ");
-  integerInWords = integerInWords.replace(/( And )/g, " ");
+  integerInWords = integerInWords.replace(/-/g, " "); // replace'-' with space
+  integerInWords = integerInWords.replace(/[^a-zA-Z ]/g, ""); // remove non-letters
+  integerInWords = integerInWords.replace(/( and )/g, " "); // remove 'and'
+  integerInWords = integerInWords.replace(/( And )/g, " "); // remove 'And'
   const words = integerInWords.split(" ");
 
   let errorWords = "";

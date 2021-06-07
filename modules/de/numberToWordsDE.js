@@ -74,7 +74,7 @@ function integerToWordsDE(integer) {
 // *******************************************
 function numbersUnderThousandToWordsDE(number) {
   const zero2Nineteen = ["", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn", "sechzehn", "siebzehn", "achtzehn", "neunzehn"];
-  const tens = ["", "", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechszig", "siebzig", "achtzig", "neunzig"];
+  const tens = ["", "", "zwanzig", "dreißig", "vierzig", "fünfzig", "sechzig", "siebzig", "achtzig", "neunzig"];
   let txt = "";
   if (number.length == 3 && number.charAt(0) != "0") {
     txt += zero2Nineteen[number.charAt(0)] + "hundert";
